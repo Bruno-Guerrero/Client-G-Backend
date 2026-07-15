@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/countbl")  // El grupo de peticiones que se van a escuchar con este Controller
-// http://localhost:8080/countbl
+@RequestMapping("/client-gest")  // El grupo de peticiones que se van a escuchar con este Controller
+// http://localhost:8080/client-gest
 public class UserController {
 
     @Autowired

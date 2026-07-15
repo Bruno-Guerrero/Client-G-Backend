@@ -1,5 +1,7 @@
 package org.guerrero.bruno.clientg;
 
+import org.guerrero.bruno.clientg.entities.Authority;
+import org.guerrero.bruno.clientg.services.AuthorityService;
 import org.guerrero.bruno.clientg.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +16,11 @@ public class ClientGApplication {
     }
 
     @Bean
-    public CommandLineRunner startConfiguration(UserService userService){
+    public CommandLineRunner startConfiguration(UserService userService, AuthorityService authorityService){
         return args ->{
 
-
+            Authority authority1 = authorityService.add(new Authority(null, "ADMIN", null));
+            Authority authority2 = authorityService.add(new Authority(null, "ACCOUNTANT", null));
 
 
 

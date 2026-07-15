@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/clientGest") // http://localhost:8080/clientGest
+@RequestMapping("/client-gest") // http://localhost:8080/clientGest
 public class LoginLogController {
     /*@Autowired
     PaymentService pymentService:*/ // es la version no recomendada, el autowired ademas ahora lo generamos de forma automatica eal detectar que es el unicoo service
