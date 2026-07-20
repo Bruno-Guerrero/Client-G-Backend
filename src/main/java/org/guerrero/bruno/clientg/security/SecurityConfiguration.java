@@ -36,7 +36,9 @@ public class SecurityConfiguration {
             // -- Registro para admin
             "/client-gest/users/register/**",
             // -- Registro para clientes
-            "/client-gest/accountants",
+            "/client-gest/accountants/register/**",
+
+
 
 
     };
@@ -91,7 +93,12 @@ public class SecurityConfiguration {
                         //.anyRequest().permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
+
+
+                        .requestMatchers(HttpMethod.POST,"/client-gest/payments/register/**").hasAnyAuthority("ACCOUNTANT")
+
                         /*
+
                         //permisos customers
                         .requestMatchers(HttpMethod.GET,"/seedair/customers/getByUserId/**").hasAnyAuthority("CUSTOMER","ADMIN")
 

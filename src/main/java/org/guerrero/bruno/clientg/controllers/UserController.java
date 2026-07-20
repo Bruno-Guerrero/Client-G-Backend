@@ -2,8 +2,10 @@ package org.guerrero.bruno.clientg.controllers;
 
 import org.guerrero.bruno.clientg.dtos.TokenDTO;
 import org.guerrero.bruno.clientg.dtos.UserDTO;
+import org.guerrero.bruno.clientg.repositories.LoginLogRepository;
 import org.guerrero.bruno.clientg.security.JwtUtilService;
 import org.guerrero.bruno.clientg.security.UserSecurity;
+import org.guerrero.bruno.clientg.services.LoginLogService;
 import org.guerrero.bruno.clientg.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,15 +34,17 @@ public class UserController {
     @Autowired
     JwtUtilService jwtUtilService;
 
+    @Autowired
+    LoginLogService loginLogService;
 
-    @PostMapping("/users/register") // http://localhost:8080/countbl/users/register
+    @PostMapping("/users/register") // http://localhost:8080/client-gest/users/register
     public ResponseEntity<UserDTO> register(@RequestBody UserDTO user){
         user=userService.addDTO(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
 
-    @PostMapping("/users/login") // http://localhost:8080/countbl/users/login
+    @PostMapping("/users/login") // http://localhost:8080/client-gest/users/login
     public ResponseEntity<TokenDTO> login(@RequestBody UserDTO user){
 
         authenticationManager.authenticate(
@@ -54,6 +58,8 @@ public class UserController {
         String authorities = userSecurity.getUser().getAuthorities().stream().
                 map(authority -> authority.getName())
                 .collect(Collectors.joining(";","",""));
+
+        loginLogService.addLoginLog(userSecurity.getUser());
 
         return new ResponseEntity<>(new TokenDTO(jwt, id, authorities), HttpStatus.OK);
 

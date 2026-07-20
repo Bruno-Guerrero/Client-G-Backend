@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,9 @@ public class AccountantServiceImpl implements AccountantService {
     private List<Authority> authoritiesFromString(String authorities) {
 
         List<Authority> authorityList = new ArrayList<>();
+
         List<String> authorityStringList = Arrays.stream(authorities.split(";")).toList();
+
         for (String authorityString : authorityStringList) {
             Authority authority = authorityService.findByName(authorityString);
             if (authority != null) {
@@ -39,13 +42,10 @@ public class AccountantServiceImpl implements AccountantService {
         }
         return authorityList;
     }
-    @Override
-    public AccountantDTO findById(Long id) {
-        return null;
-    }
 
     @Override
     public AccountantDTO addDTO(AccountantDTO accountantDTO) {
+        //La autoridad utilizando este metodo se asigna automaticamente, a diferencia que is se hiciera con el userController, cuya autoridad deberá ser dada desde el mismo UserDTO
         List<Authority> authorityList = authoritiesFromString("ACCOUNTANT");
 
         List<User> users = userRepository.findAll();
@@ -65,7 +65,7 @@ public class AccountantServiceImpl implements AccountantService {
 
         Accountant newAccountant = new Accountant(
                 null, accountantDTO.getFirstName(), accountantDTO.getLastName(),
-                LocalDate.now(), null, null, true, newUser, null
+                LocalDateTime.now(), null, null, true, newUser, null
         );
 
         accountantRepository.save(newAccountant);

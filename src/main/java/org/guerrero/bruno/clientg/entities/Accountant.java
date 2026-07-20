@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,9 +22,9 @@ public class Accountant {
     private String firstName;
     private String lastName;
 
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
-    private LocalDate deletedAAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     private Boolean isActive;
 
