@@ -54,6 +54,12 @@ public class ClientController {
         return new ResponseEntity<>(paymentsDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/{clientId}")//para el admin
+    public ResponseEntity<ClientListDTO> getClientById(@PathVariable Long clientId){
+        ClientListDTO clientDTO = clientService.getClientListDTOById(clientId);
+        return new  ResponseEntity<>(clientDTO, HttpStatus.OK);
+    }
+
     @PostMapping("/{clientId}/automatic-payment")
     public ResponseEntity<Void> generateManualInvoice(@PathVariable Long clientId) {
 

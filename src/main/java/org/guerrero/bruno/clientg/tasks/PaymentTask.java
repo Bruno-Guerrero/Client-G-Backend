@@ -16,6 +16,7 @@ public class PaymentTask {
     private final ClientRepository clientRepository;
     private final PaymentService paymentService;
 
+    //AL INICIO DE CADA DIA
     @Scheduled(cron = "0 0 0 * * ?") // Todos los días a las 12 AM
     public void executeDailyBillingCheck() {
         Integer today = LocalDate.now().getDayOfMonth();

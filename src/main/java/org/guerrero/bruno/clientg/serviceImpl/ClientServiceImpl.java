@@ -143,13 +143,40 @@ public class ClientServiceImpl implements ClientService {
         client.setAutomaticPaymentDay(clientDTO.getAutomaticPaymentDay());
         client.setAutomaticPaymentAvailable(clientDTO.getAutomaticPaymentAvailable());
 
+
+        clientRepository.save(client);
+
         return clientDTO;
     }
 
     @Override
-    public Client findById(Long clientId){
-        return clientRepository.findById(clientId).orElse(null);
+    public Client findById(Long clientId) {
+        return clientRepository.findClientById(clientId);
     }
+
+    @Override
+    public ClientListDTO getClientListDTOById(Long clientId){
+
+        Client client = clientRepository.findClientById(clientId);
+
+        ClientListDTO clientListDTO =new ClientListDTO(
+                client.getId(),
+                client.getRuc(),
+                client.getRazonSocial(),
+                client.getLastName() + ", " + client.getFirstName(),
+                paymentRepository.countByClientAndStatus(client, Payment.Status.PENDIENTE),
+                paymentRepository.countByClientAndStatus(client, Payment.Status.RETRASO),
+                client.getAutomaticPaymentDay(),
+                client.getAutomaticPaymentAvailable(),
+                client.getCreatedAt()
+
+
+        );
+
+
+        return clientListDTO;
+    }
+
 
 
 }

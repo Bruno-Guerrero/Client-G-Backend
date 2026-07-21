@@ -15,4 +15,5 @@ public interface ClientService {
     public String deleteOrRecoverClientById(Long clientId, Boolean isActive);
     public ClientUpdateDTO updateDTO(ClientUpdateDTO clientDTO);
     public Client findById(Long clientId);
+    public ClientListDTO getClientListDTOById(Long clientId);
 }
