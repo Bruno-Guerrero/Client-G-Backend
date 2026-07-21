@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -17,10 +18,10 @@ public class LoginLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate login_at;
+    private LocalDateTime login_at;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", unique = true, nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod; //TRANSFERENCIA o EFECTIVO
@@ -27,24 +29,23 @@ public class Payment {
     private Status status;
 
     private BigDecimal amount;
+
+    //Fecha en la que se efectuó el pago, la ingresa el Accountant, ya que no necesariamente se pagó el mismo dia en el que se registró
     private LocalDate paymentDate;
     private String paymentReason;
 
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
-    private LocalDate deletedAAt;
+
+
+    //Fecha y hora en la que se generó el registro de payment (se genera automaticamente el 30 de cada mes)
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     private Boolean isActive;
-
-
-
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-
-
-
 
 
 //ENUMS
@@ -53,12 +54,13 @@ public class Payment {
         EFECTIVO
     }
     public enum Currency{
-        PE,
+        PEN,
         US,
         EU
     }
     public enum Status{
         PENDIENTE,
-        PAGADO
+        PAGADO,
+        RETRASO
     }
 }

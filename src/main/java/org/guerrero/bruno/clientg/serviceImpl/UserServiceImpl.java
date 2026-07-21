@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         List<Authority> authorityList = authoritiesFromString(userDTO.getAuthorities());
 
         User newUser = new User(null, userDTO.getUsername(),
-                new BCryptPasswordEncoder().encode(userDTO.getPassword()), authorityList, null);
+                new BCryptPasswordEncoder().encode(userDTO.getPassword()), authorityList, null, null);
 
         newUser = userRepository.save(newUser);
         userDTO.setId(newUser.getId());

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -24,9 +25,12 @@ public class Client {
     private String ruc;
     private String razonSocial;
 
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
-    private LocalDate deletedAAt;
+    private Integer automaticPaymentDay;
+    private Boolean automaticPaymentAvailable;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     private Boolean isActive;
 

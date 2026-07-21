@@ -31,12 +31,14 @@ public class SecurityConfiguration {
 
 
             // -- Login
-            "/countbl/users/login/**",
+            "/client-gest/users/login/**",
 
             // -- Registro para admin
-            "/countbl/users/register/**",
+            "/client-gest/users/register/**",
             // -- Registro para clientes
-            "/countbl/clients/register/**",
+            "/client-gest/accountants/register/**",
+
+
 
 
     };
@@ -92,6 +94,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
 
+
+                        .requestMatchers(HttpMethod.POST,"/client-gest/payments/register/**").hasAnyAuthority("ACCOUNTANT")
+
+                        /*
+
                         //permisos customers
                         .requestMatchers(HttpMethod.GET,"/seedair/customers/getByUserId/**").hasAnyAuthority("CUSTOMER","ADMIN")
 
@@ -133,7 +140,7 @@ public class SecurityConfiguration {
                         //permisos droneBrands
                         .requestMatchers(HttpMethod.GET,"/seedair/brands/**").hasAnyAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/seedair/brands/**").hasAnyAuthority("ADMIN")
-
+                        */
                         .anyRequest().authenticated()
 
         );
