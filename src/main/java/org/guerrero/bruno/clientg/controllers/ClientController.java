@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/client-gest/clients") // http://localhost:8080/client-gest
+@RequestMapping("/client-gest/clients") // http://localhost:8080/client-gest/clients
 public class ClientController {
     private final ClientService clientService;
     private final PaymentService paymentService;
@@ -47,19 +47,21 @@ public class ClientController {
         ClientUpdateDTO client = clientService.updateDTO(clientUpdateDTO);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
-
+/*
     @GetMapping("/{id}/payments")
     public ResponseEntity<List<PaymentListDTO>> getPayments(@PathVariable Long id){
         List<PaymentListDTO> paymentsDTO = paymentService.getPaymentsDTO(id);
         return new ResponseEntity<>(paymentsDTO, HttpStatus.OK);
     }
-
+*/
     @GetMapping("/{clientId}")//para el admin
     public ResponseEntity<ClientListDTO> getClientById(@PathVariable Long clientId){
         ClientListDTO clientDTO = clientService.getClientListDTOById(clientId);
         return new  ResponseEntity<>(clientDTO, HttpStatus.OK);
     }
 
+
+    /* No tiene utilidad
     @PostMapping("/{clientId}/automatic-payment")
     public ResponseEntity<Void> generateManualInvoice(@PathVariable Long clientId) {
 
@@ -69,5 +71,5 @@ public class ClientController {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
+    */
 }

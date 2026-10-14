@@ -89,16 +89,14 @@ public class ClientServiceImpl implements ClientService {
                                 c.getRuc(),
                                 c.getRazonSocial(),
                                 c.getLastName() + ", " + c.getFirstName(),
-                                paymentRepository.countByClientAndStatus(c, Payment.Status.PENDIENTE),
-                                paymentRepository.countByClientAndStatus(c, Payment.Status.RETRASO),
+                                paymentRepository.countByClientAndStatusAndIsActiveTrue(c, Payment.Status.PENDIENTE),
+                                paymentRepository.countByClientAndStatusAndIsActiveTrue(c, Payment.Status.RETRASO),
                                 c.getAutomaticPaymentDay(),
                                 c.getAutomaticPaymentAvailable(),
                                 c.getCreatedAt()
 
                         )).toList();
-        if(clientListDTO.isEmpty()){
-            throw new RuntimeException("No hay clientes registrados");
-        }
+        // Un contador sin clientes es un caso normal: se devuelve [] (200) en vez de lanzar un 500
         return clientListDTO;
     }
 
@@ -164,8 +162,8 @@ public class ClientServiceImpl implements ClientService {
                 client.getRuc(),
                 client.getRazonSocial(),
                 client.getLastName() + ", " + client.getFirstName(),
-                paymentRepository.countByClientAndStatus(client, Payment.Status.PENDIENTE),
-                paymentRepository.countByClientAndStatus(client, Payment.Status.RETRASO),
+                paymentRepository.countByClientAndStatusAndIsActiveTrue(client, Payment.Status.PENDIENTE),
+                paymentRepository.countByClientAndStatusAndIsActiveTrue(client, Payment.Status.RETRASO),
                 client.getAutomaticPaymentDay(),
                 client.getAutomaticPaymentAvailable(),
                 client.getCreatedAt()

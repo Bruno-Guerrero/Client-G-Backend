@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
     //No deberia pertenecer a este repository, lo dejaré aqui por esta ocasión
-    Long countByClientAndStatus(Client client, Payment.Status status);
+    //Solo cuenta pagos activos: un pago anulado no debe seguir sumando como pendiente o en retraso
+    Long countByClientAndStatusAndIsActiveTrue(Client client, Payment.Status status);
 
     List<Payment> findAllByClient_Id(Long clientId);
 

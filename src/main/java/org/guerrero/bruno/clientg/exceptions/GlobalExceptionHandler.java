@@ -61,5 +61,17 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(InvalidOperationException.class)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    public ErrorMessage invalidOperationException(InvalidOperationException e, WebRequest request) {
+        return new ErrorMessage(
+                HttpStatus.NOT_ACCEPTABLE.value(),
+                "InvalidOperationException",
+                e.getMessage(),
+                request.getDescription(false),
+                LocalDateTime.now()
+        );
+    }
+
 
 }

@@ -96,6 +96,8 @@ public class SecurityConfiguration {
 
 
                         .requestMatchers(HttpMethod.POST,"/client-gest/payments/register/**").hasAnyAuthority("ACCOUNTANT")
+                        //Editar (PUT /payments/{id}) y anular (PUT /payments/{id}/annul) pagos
+                        .requestMatchers(HttpMethod.PUT,"/client-gest/payments/**").hasAnyAuthority("ACCOUNTANT")
 
                         /*
 

@@ -17,7 +17,7 @@ public class AccountantController {
         this.accountantService = accountantService;
     }
 
-    @PostMapping("/accountants/register")
+    @PostMapping("/accountants/register") //http://localhost:8080/client-gest/accountants/register
     public ResponseEntity<AccountantDTO> registerAccountant(@RequestBody AccountantDTO accountantDTO) {
 
         AccountantDTO accountantDto = accountantService.addDTO(accountantDTO);
