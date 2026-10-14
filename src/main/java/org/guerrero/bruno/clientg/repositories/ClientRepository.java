@@ -13,7 +13,8 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> findClientByAccountantAndIsActiveTrue(Accountant accountant);
     Client findClientById(Long clientId);
 
-    List<Client> findAllByAutomaticPaymentDayAndAutomaticPaymentAvailableTrue(Integer automaticPaymentDay);
+    List<Client> findAllByAutomaticPaymentDayGreaterThanEqualAndAutomaticPaymentAvailableTrueAndIsActiveTrue(Integer automaticPaymentDay);
 
+    List<Client> findAllByAutomaticPaymentDayAndAutomaticPaymentAvailableTrueAndIsActiveTrue(Integer automaticPaymentDay);
 
 }
